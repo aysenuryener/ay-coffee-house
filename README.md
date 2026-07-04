@@ -28,10 +28,10 @@ vercel        # veya vercel.com'dan repoyu içe aktar
 Statik site — ekstra ayar yok.
 
 ## Fontlar (Google Fonts YOK)
-Başlık serif zinciri: Canela → Editorial New → Hoefler Text → Baskerville → Didot → Georgia.
-Gövde: SF Pro / Neue Haas / system-ui. Lisanslı Canela/Editorial New'i (veya OFL
-Fraunces/Cormorant) kullanmak istersen woff2'yi `fonts/` klasörüne koyup index.html
-başındaki @font-face bloğunu aç.
+Başlıklar: **Cormorant** (500) · Gövde/nav/buton/etiket: **Inter** (400/500).
+Bunny Fonts üzerinden yükleniyor (Google değil): `fonts.bunny.net`. İnternet
+bağlantısı olduğu sürece ekstra kurulum gerekmez; tamamen çevrimdışı çalışması
+gerekirse woff2 dosyalarını `fonts/` klasörüne indirip @font-face ile bağlarım.
 
 ## Renkler (WCAG AA doğrulanmış)
 Ana başlık #3E3027 (11.6:1) · menü adı #4A3A2F (10.4:1) · gövde #7A6C61 (4.6:1)

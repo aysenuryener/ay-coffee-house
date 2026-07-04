@@ -33,14 +33,28 @@
   .pill.on{background:#4A3A2F;color:#FFFFFF}
   .cat h2{font-family:var(--serif);font-size:2rem;color:var(--h1);text-align:center;font-weight:400;margin-top:40px}
   html[dir="rtl"] .cat h2{font-family:var(--serif-ar)}
-  .item{padding:16px 0;border-bottom:1px solid var(--line)}
+
+  .cat-hero{aspect-ratio:16/7;border-radius:14px;overflow:hidden;margin:18px 0 22px;box-shadow:0 20px 40px -28px rgba(62,48,39,.28)}
+  .cat-hero img{width:100%;height:100%;object-fit:cover;display:block}
+
+  .item{
+    display:flex;gap:14px;align-items:center;padding:12px;border-radius:14px;
+    border:1px solid var(--line);background:var(--card);margin-bottom:10px;
+    transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+  }
+  .item:hover{transform:translateY(-2px);box-shadow:0 14px 30px -22px rgba(62,48,39,.3);border-color:#DCCFBE}
+  .item-thumb{width:64px;height:64px;border-radius:10px;overflow:hidden;flex:none;background:linear-gradient(150deg,var(--bg2),#EBE3D5)}
+  .item-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .item-thumb-empty{display:flex;align-items:center;justify-content:center}
+  .item-thumb-empty span{font-family:var(--serif);color:var(--price);font-size:.9rem;opacity:.55}
+  .item-body{flex:1;min-width:0}
   .item-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
-  .item .n{font-family:var(--serif);font-size:1.3rem;color:#4A3A2F}
+  .item .n{font-family:var(--serif);font-size:1.18rem;color:#4A3A2F}
   html[dir="rtl"] .item .n{font-family:var(--serif-ar)}
-  .item .p{font-family:var(--serif);font-size:1.24rem;color:var(--price);white-space:nowrap}
-  .item-bot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:3px}
-  .item .d{font-size:.86rem;color:var(--body)}
-  .item .k{font-size:.72rem;color:var(--muted);white-space:nowrap;letter-spacing:.04em}
+  .item .p{font-family:var(--serif);font-size:1.12rem;color:var(--price);white-space:nowrap}
+  .item-bot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:2px}
+  .item .d{font-size:.8rem;color:var(--body);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .item .k{font-size:.68rem;color:var(--muted);white-space:nowrap;letter-spacing:.04em}
   .foot{text-align:center;margin-top:48px;color:var(--muted);font-size:.82rem}
   .foot .g{font-family:var(--serif);font-style:italic;font-size:1.1rem;color:var(--price);margin-bottom:12px}
   html[dir="rtl"] .foot .g{font-family:var(--serif-ar);font-style:normal}
@@ -64,39 +78,41 @@
 <script>
 const MENU={
   kahve:[
-    {n:{tr:"Espresso",en:"Espresso",ar:"إسبريسو"},d:{tr:"Ev harmanı, çikolata & fındık",en:"House blend, chocolate & hazelnut",ar:"خلطة المنزل، شوكولاتة وبندق"},p:70,k:5},
-    {n:{tr:"Americano",en:"Americano",ar:"أمريكانو"},d:{tr:"Espresso, sıcak su",en:"Espresso, hot water",ar:"إسبريسو وماء ساخن"},p:75,k:10},
-    {n:{tr:"Latte",en:"Latte",ar:"لاتيه"},d:{tr:"İpeksi mikro köpük",en:"Silky microfoam",ar:"رغوة حريرية ناعمة"},p:85,k:120},
-    {n:{tr:"Cappuccino",en:"Cappuccino",ar:"كابتشينو"},d:{tr:"İnce kakao serpme",en:"Dusted with fine cocoa",ar:"رشة كاكاو ناعمة"},p:85,k:110},
-    {n:{tr:"Flat White",en:"Flat White",ar:"فلات وايت"},d:{tr:"Çift ristretto, ipeksi süt",en:"Double ristretto, silky milk",ar:"ريستريتو مزدوج وحليب حريري"},p:90,k:130},
-    {n:{tr:"Mocha",en:"Mocha",ar:"موكا"},d:{tr:"Espresso, çikolata, süt",en:"Espresso, chocolate, milk",ar:"إسبريسو وشوكولاتة وحليب"},p:95,k:220},
-    {n:{tr:"Caramel Latte",en:"Caramel Latte",ar:"لاتيه كراميل"},d:{tr:"Ev yapımı karamel",en:"House-made caramel",ar:"كراميل محضّر منزليًا"},p:95,k:210},
-    {n:{tr:"Türk Kahvesi",en:"Turkish Coffee",ar:"قهوة تركية"},d:{tr:"Bakır cezve, lokum ile",en:"Copper pot, with lokum",ar:"في ركوة نحاسية مع الملبن"},p:75,k:15}
+    {img:"espresso",n:{tr:"Espresso",en:"Espresso",ar:"إسبريسو"},d:{tr:"Ev harmanı, çikolata & fındık",en:"House blend, chocolate & hazelnut",ar:"خلطة المنزل، شوكولاتة وبندق"},p:70,k:5},
+    {img:"americano",n:{tr:"Americano",en:"Americano",ar:"أمريكانو"},d:{tr:"Espresso, sıcak su",en:"Espresso, hot water",ar:"إسبريسو وماء ساخن"},p:75,k:10},
+    {img:"latte",n:{tr:"Latte",en:"Latte",ar:"لاتيه"},d:{tr:"İpeksi mikro köpük",en:"Silky microfoam",ar:"رغوة حريرية ناعمة"},p:85,k:120},
+    {img:"cappuccino",n:{tr:"Cappuccino",en:"Cappuccino",ar:"كابتشينو"},d:{tr:"İnce kakao serpme",en:"Dusted with fine cocoa",ar:"رشة كاكاو ناعمة"},p:85,k:110},
+    {img:"flat-white",n:{tr:"Flat White",en:"Flat White",ar:"فلات وايت"},d:{tr:"Çift ristretto, ipeksi süt",en:"Double ristretto, silky milk",ar:"ريستريتو مزدوج وحليب حريري"},p:90,k:130},
+    {img:"mocha",n:{tr:"Mocha",en:"Mocha",ar:"موكا"},d:{tr:"Espresso, çikolata, süt",en:"Espresso, chocolate, milk",ar:"إسبريسو وشوكولاتة وحليب"},p:95,k:220},
+    {img:"caramel-latte",n:{tr:"Caramel Latte",en:"Caramel Latte",ar:"لاتيه كراميل"},d:{tr:"Ev yapımı karamel",en:"House-made caramel",ar:"كراميل محضّر منزليًا"},p:95,k:210},
+    {img:"turk-kahvesi",n:{tr:"Türk Kahvesi",en:"Turkish Coffee",ar:"قهوة تركية"},d:{tr:"Bakır cezve, lokum ile",en:"Copper pot, with lokum",ar:"في ركوة نحاسية مع الملبن"},p:75,k:15},
+    {img:"iced-latte-cold",n:{tr:"Iced Latte",en:"Iced Latte",ar:"آيس لاتيه"},d:{tr:"Buzlu, ipeksi süt",en:"Chilled, silky milk",ar:"مثلج وحليب حريري"},p:100,k:150}
   ],
   kahvedisi:[
-    {n:{tr:"Matcha Latte",en:"Matcha Latte",ar:"ماتشا لاتيه"},d:{tr:"Tören matchası, süt",en:"Ceremonial matcha, milk",ar:"ماتشا احتفالية وحليب"},p:95,k:140},
-    {n:{tr:"Sıcak Çikolata",en:"Hot Chocolate",ar:"شوكولاتة ساخنة"},d:{tr:"Belçika çikolatası",en:"Belgian chocolate",ar:"شوكولاتة بلجيكية"},p:90,k:300},
-    {n:{tr:"Chai Latte",en:"Chai Latte",ar:"تشاي لاتيه"},d:{tr:"Baharatlı, ballı",en:"Spiced, honeyed",ar:"بالتوابل والعسل"},p:90,k:190},
-    {n:{tr:"Limonata",en:"Lemonade",ar:"ليموناضة"},d:{tr:"Taze sıkım, nane",en:"Fresh-pressed, mint",ar:"عصير طازج بالنعناع"},p:80,k:90},
+    {img:"matcha-latte",n:{tr:"Matcha Latte",en:"Matcha Latte",ar:"ماتشا لاتيه"},d:{tr:"Tören matchası, süt",en:"Ceremonial matcha, milk",ar:"ماتشا احتفالية وحليب"},p:95,k:140},
+    {img:"sicak-cikolata",n:{tr:"Sıcak Çikolata",en:"Hot Chocolate",ar:"شوكولاتة ساخنة"},d:{tr:"Belçika çikolatası",en:"Belgian chocolate",ar:"شوكولاتة بلجيكية"},p:90,k:300},
+    {img:"chai-latte",n:{tr:"Chai Latte",en:"Chai Latte",ar:"تشاي لاتيه"},d:{tr:"Baharatlı, ballı",en:"Spiced, honeyed",ar:"بالتوابل والعسل"},p:90,k:190},
+    {img:"limonata",n:{tr:"Limonata",en:"Lemonade",ar:"ليموناضة"},d:{tr:"Taze sıkım, nane",en:"Fresh-pressed, mint",ar:"عصير طازج بالنعناع"},p:80,k:90},
     {n:{tr:"Ekstra Shot",en:"Extra Shot",ar:"شوت إضافي"},d:{tr:"Tek shot espresso",en:"Single espresso shot",ar:"شوت إسبريسو مفرد"},p:15,k:5},
     {n:{tr:"Badem / Yulaf Sütü",en:"Almond / Oat Milk",ar:"حليب لوز / شوفان"},d:{tr:"Süt değişimi",en:"Milk swap",ar:"استبدال الحليب"},p:20,k:30}
   ],
   kahvalti:[
-    {n:{tr:"Meşe Tabağı Kahvaltı",en:"Oak Board Breakfast",ar:"طبق البلوط للفطور"},d:{tr:"Peynirler, zeytin, bal-kaymak, ekşi maya",en:"Cheeses, olives, honey-cream, sourdough",ar:"أجبان وزيتون وعسل بالقشطة وخبز مخمّر"},p:340,k:720},
-    {n:{tr:"Menemen",en:"Menemen",ar:"منمن"},d:{tr:"Yumuşak yumurta, domates, biber",en:"Soft eggs, tomato, pepper",ar:"بيض طري وطماطم وفلفل"},p:180,k:340},
-    {n:{tr:"Avokado & Beyaz Peynir Tost",en:"Avocado & Feta Toast",ar:"توست أفوكادو وجبن فيتا"},d:{tr:"Ekşi maya, acı biber yağı",en:"Sourdough, chilli oil",ar:"خبز مخمّر وزيت الفلفل الحار"},p:210,k:380},
-    {n:{tr:"Simit & Peynir Tabağı",en:"Simit & Cheese Plate",ar:"صحن سميت وجبن"},d:{tr:"Taze simit, kaşar, reçel",en:"Fresh simit, kashar, jam",ar:"سميت طازج وقشقوان ومربى"},p:160,k:450},
-    {n:{tr:"Yoğurt & Granola",en:"Yoghurt & Granola",ar:"زبادي وغرانولا"},d:{tr:"Ev granolası, bal, meyve",en:"House granola, honey, fruit",ar:"غرانولا منزلية وعسل وفواكه"},p:145,k:290}
+    {img:"mese-tabagi",n:{tr:"Meşe Tabağı Kahvaltı",en:"Oak Board Breakfast",ar:"طبق البلوط للفطور"},d:{tr:"Peynirler, zeytin, bal-kaymak, ekşi maya",en:"Cheeses, olives, honey-cream, sourdough",ar:"أجبان وزيتون وعسل بالقشطة وخبز مخمّر"},p:340,k:720},
+    {img:"menemen",n:{tr:"Menemen",en:"Menemen",ar:"منمن"},d:{tr:"Yumuşak yumurta, domates, biber",en:"Soft eggs, tomato, pepper",ar:"بيض طري وطماطم وفلفل"},p:180,k:340},
+    {img:"avokado-tost",n:{tr:"Avokado & Beyaz Peynir Tost",en:"Avocado & Feta Toast",ar:"توست أفوكادو وجبن فيتا"},d:{tr:"Ekşi maya, acı biber yağı",en:"Sourdough, chilli oil",ar:"خبز مخمّر وزيت الفلفل الحار"},p:210,k:380},
+    {img:"simit-tabagi",n:{tr:"Simit & Peynir Tabağı",en:"Simit & Cheese Plate",ar:"صحن سميت وجبن"},d:{tr:"Taze simit, kaşar, reçel",en:"Fresh simit, kashar, jam",ar:"سميت طازج وقشقوان ومربى"},p:160,k:450},
+    {img:"yogurt-granola",n:{tr:"Yoğurt & Granola",en:"Yoghurt & Granola",ar:"زبادي وغرانولا"},d:{tr:"Ev granolası, bal, meyve",en:"House granola, honey, fruit",ar:"غرانولا منزلية وعسل وفواكه"},p:145,k:290}
   ],
   tatli:[
-    {n:{tr:"Tiramisu",en:"Tiramisu",ar:"تيراميسو"},d:{tr:"Mascarpone, espresso",en:"Mascarpone, espresso",ar:"ماسكاربوني وإسبريسو"},p:140,k:420},
-    {n:{tr:"Frenk Üzümlü Cheesecake",en:"Berry Cheesecake",ar:"تشيز كيك بالتوت"},d:{tr:"Orman meyveli sos",en:"Berry coulis",ar:"صوص التوت البري"},p:150,k:450},
-    {n:{tr:"Antep Fıstıklı Kruvasan",en:"Pistachio Croissant",ar:"كرواسون بالفستق"},d:{tr:"İki kez pişmiş, çıtır",en:"Twice baked, crisp",ar:"مخبوز مرتين ومقرمش"},p:120,k:380},
-    {n:{tr:"Zeytinyağlı Kek",en:"Olive Oil Cake",ar:"كيك زيت الزيتون"},d:{tr:"Narenciye, biberiye",en:"Citrus, rosemary",ar:"حمضيات وإكليل الجبل"},p:130,k:320},
-    {n:{tr:"Ballı İncir Tart",en:"Honey Fig Tart",ar:"تارت التين بالعسل"},d:{tr:"Mevsim inciri, badem",en:"Seasonal fig, almond",ar:"تين موسمي ولوز"},p:150,k:360},
-    {n:{tr:"Affogato",en:"Affogato",ar:"أفوغاتو"},d:{tr:"Vanilyalı dondurma, espresso",en:"Vanilla gelato, espresso",ar:"آيس كريم فانيلا وإسبريسو"},p:135,k:240}
+    {img:"tiramisu-new",n:{tr:"Tiramisu",en:"Tiramisu",ar:"تيراميسو"},d:{tr:"Mascarpone, espresso",en:"Mascarpone, espresso",ar:"ماسكاربوني وإسبريسو"},p:140,k:420},
+    {img:"cheesecake-berry",n:{tr:"Frenk Üzümlü Cheesecake",en:"Berry Cheesecake",ar:"تشيز كيك بالتوت"},d:{tr:"Orman meyveli sos",en:"Berry coulis",ar:"صوص التوت البري"},p:150,k:450},
+    {img:"fistikli-kruvasan",n:{tr:"Antep Fıstıklı Kruvasan",en:"Pistachio Croissant",ar:"كرواسون بالفستق"},d:{tr:"İki kez pişmiş, çıtır",en:"Twice baked, crisp",ar:"مخبوز مرتين ومقرمش"},p:120,k:380},
+    {img:"zeytinyagli-kek",n:{tr:"Zeytinyağlı Kek",en:"Olive Oil Cake",ar:"كيك زيت الزيتون"},d:{tr:"Narenciye, biberiye",en:"Citrus, rosemary",ar:"حمضيات وإكليل الجبل"},p:130,k:320},
+    {img:"incir-tart",n:{tr:"Ballı İncir Tart",en:"Honey Fig Tart",ar:"تارت التين بالعسل"},d:{tr:"Mevsim inciri, badem",en:"Seasonal fig, almond",ar:"تين موسمي ولوز"},p:150,k:360},
+    {img:"affogato",n:{tr:"Affogato",en:"Affogato",ar:"أفوغاتو"},d:{tr:"Vanilyalı dondurma, espresso",en:"Vanilla gelato, espresso",ar:"آيس كريم فانيلا وإسبريسو"},p:135,k:240}
   ]
 };
+const CAT_HERO={kahve:"hero-kahve",kahvalti:"hero-kahvalti",tatli:"hero-tatli"};
 const CATS=["kahve","kahvedisi","kahvalti","tatli"];
 const T={
  tr:{tag:"Sıcak bir atmosfer, unutulmaz anlar.",good:"İyi kahve · İyi yemek · İyi bir gün",addr:"Kalkandere Merkez, Rize · Her gün 08:00—19:00",cal:"Kalori değerleri ortalamadır; yeni yönetmelik gereği bilgilendirme amaçlıdır.",kcal:"kcal",cat:{kahve:"Kahve",kahvedisi:"Kahve Dışı",kahvalti:"Kahvaltı",tatli:"Tatlılar"}},
@@ -106,13 +122,27 @@ const T={
 let lang="tr";
 function render(){
   document.getElementById("pills").innerHTML=CATS.map(c=>`<button class="pill" onclick="document.getElementById('cat-${c}').scrollIntoView({behavior:'smooth',block:'start'})">${T[lang].cat[c]}</button>`).join("");
-  document.getElementById("cats").innerHTML=CATS.map(c=>`
-    <section class="cat" id="cat-${c}"><h2>${T[lang].cat[c]}</h2>${
-      MENU[c].map(it=>`<div class="item">
-        <div class="item-top"><span class="n">${it.n[lang]}</span><span class="p">₺${it.p}</span></div>
-        <div class="item-bot"><span class="d">${it.d[lang]}</span><span class="k">${it.k} ${T[lang].kcal}</span></div>
-      </div>`).join("")
-    }</section>`).join("");
+  document.getElementById("cats").innerHTML=CATS.map(c=>{
+    const heroImg = CAT_HERO[c];
+    const hero = heroImg
+      ? `<div class="cat-hero"><img src="images/${heroImg}.jpg" alt="" loading="lazy" decoding="async"></div>`
+      : "";
+    return `
+    <section class="cat" id="cat-${c}"><h2>${T[lang].cat[c]}</h2>${hero}${
+      MENU[c].map(it=>{
+        const thumb = it.img
+          ? `<div class="item-thumb"><img src="images/${it.img}.jpg" alt="" loading="lazy" decoding="async"></div>`
+          : `<div class="item-thumb item-thumb-empty" aria-hidden="true"><span>Ay</span></div>`;
+        return `<div class="item">
+          ${thumb}
+          <div class="item-body">
+            <div class="item-top"><span class="n">${it.n[lang]}</span><span class="p">₺${it.p}</span></div>
+            <div class="item-bot"><span class="d">${it.d[lang]}</span><span class="k">${it.k} ${T[lang].kcal}</span></div>
+          </div>
+        </div>`;
+      }).join("")
+    }</section>`;
+  }).join("");
   document.querySelectorAll("[data-t]").forEach(el=>{if(T[lang][el.dataset.t])el.textContent=T[lang][el.dataset.t];});
 }
 function setLang(l){lang=l;document.documentElement.lang=l;document.documentElement.dir=l==="ar"?"rtl":"ltr";
