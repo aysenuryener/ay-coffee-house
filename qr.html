@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ay Coffee House — QR Masa Kartı</title>
+<link href="https://fonts.bunny.net/css?family=cormorant:400,500,600|inter:400,500&display=swap" rel="stylesheet">
+<style>
+  :root{--cream:#F8F4ED;--olive:#3E3027;--gold:#926D3C;--espresso:#3E3027;--taupe:#7A6C61;--oak:#D8C3A2;--serif:"Cormorant","Cormorant Garamond",Georgia,serif;--sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;margin:0;padding:0}
+  body{font-family:var(--sans);background:#EDE4D3;color:var(--espresso);display:flex;flex-direction:column;align-items:center;gap:26px;padding:40px 20px;min-height:100vh}
+  .hint{max-width:380px;text-align:center;font-size:.82rem;color:var(--taupe);line-height:1.5}
+  .card{width:340px;background:
+     radial-gradient(80% 40% at 50% 0%,rgba(201,172,119,.2),transparent 60%),var(--cream);
+     border:1px solid var(--oak);border-radius:6px;padding:38px 34px 34px;text-align:center;
+     box-shadow:0 40px 70px -46px rgba(74,59,46,.5)}
+  .ay{font-family:var(--serif);font-weight:600;font-size:2.6rem;color:var(--gold);line-height:1}
+  .ch{font-size:.56rem;letter-spacing:.42em;text-transform:uppercase;color:var(--olive);margin-top:3px}
+  .divider{width:40px;height:1px;background:var(--gold);margin:18px auto}
+  .lead{font-family:var(--serif);font-size:1.55rem;color:var(--espresso);margin-bottom:4px}
+  .sub{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--taupe);margin-bottom:22px}
+  .qrbox{width:180px;height:180px;margin:0 auto;background:#fff;border:1px solid var(--oak);border-radius:4px;position:relative;display:flex;align-items:center;justify-content:center}
+  .finder{position:absolute;width:42px;height:42px;border:7px solid var(--espresso);border-radius:4px}
+  .finder::after{content:"";position:absolute;inset:8px;background:var(--espresso);border-radius:1px}
+  .f1{top:14px;left:14px}.f2{top:14px;right:14px}.f3{bottom:14px;left:14px}
+  .qrbox .note{font-size:.6rem;color:var(--taupe);letter-spacing:.1em;max-width:90px}
+  .url{margin-top:20px;font-size:.78rem;letter-spacing:.08em;color:var(--olive)}
+  .brandfoot{margin-top:16px;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--taupe)}
+  @media print{body{background:#fff;padding:0}.hint{display:none}.card{box-shadow:none;border:1px solid #ccc}}
+</style>
+</head>
+<body>
+  <p class="hint">Masa kartı önizlemesi. Ortadaki beyaz kutuya, <b>aycoffeehouse.co/menu</b> adresini kodlayan gerçek bir QR (ör. qr-code-generator.com ile ürettiğin PNG) yerleştir, sonra yazdır.</p>
+  <div class="card">
+    <div class="ay">Ay</div>
+    <div class="ch">Coffee House</div>
+    <div class="divider"></div>
+    <div class="lead">Menümüzü tarayın</div>
+    <div class="sub">Scan for menu</div>
+    <div class="qrbox">
+      <span class="finder f1"></span><span class="finder f2"></span><span class="finder f3"></span>
+      <span class="note">QR buraya</span>
+    </div>
+    <div class="url">aycoffeehouse.co/menu</div>
+    <div class="brandfoot">İyi kahve · İyi yemek · İyi bir gün</div>
+  </div>
+</body>
+</html>
