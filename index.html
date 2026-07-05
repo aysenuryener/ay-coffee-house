@@ -154,6 +154,20 @@
 
   /* menu */
   #menu{background:var(--bg2)}
+  .menu-video-wrap{
+    position:relative;overflow:hidden;border-radius:16px;margin-bottom:56px;
+    aspect-ratio:21/10;box-shadow:var(--shadow);
+  }
+  .menu-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .menu-video-overlay{position:absolute;inset:0;background:rgba(35,26,20,.78)}
+  .menu-video-wrap .sec-head{position:relative;z-index:2;margin-bottom:0;padding:0 24px;max-width:640px}
+  .sec-head.on-video .rule{background:#E8C99A;margin-inline:auto}
+  .sec-head.on-video .eyebrow{color:#E8C99A}
+  .sec-head.on-video h2{color:#FFFFFF}
+  .sec-head.on-video p{color:rgba(255,255,255,.88)}
+  @media (max-width:700px){.menu-video-wrap{aspect-ratio:4/5}}
+  @media (prefers-reduced-motion:reduce){.menu-video{display:none}.menu-video-overlay{background:rgba(35,26,20,.82)}}
+
   .tabs{display:flex;gap:8px;justify-content:center;margin-bottom:40px;flex-wrap:wrap}
   .tab{font-family:var(--sans);font-size:.8rem;letter-spacing:.02em;font-weight:500;padding:12px 24px;border-radius:12px;cursor:pointer;color:#5E4C40;border:1px solid #DCCFBE;background:#FCFAF7;transition:.3s var(--ease)}
   html[dir="rtl"] .tab{font-family:var(--sans-ar)}
@@ -328,7 +342,7 @@
         <span><span class="dot"></span><span data-i="n3">Her gün 08—19</span></span>
       </div>
     </div>
-    <div class="ph hero-photo"><img src="images/kapak.jpg" alt="" onerror="this.remove()"></div>
+    <div class="ph hero-photo"><img src="images/ay-coffee-1-cephe.png" alt="" onerror="this.remove()"></div>
   </div>
 </section>
 
@@ -385,11 +399,17 @@
 
 <section id="menu">
   <div class="wrap">
-    <div class="sec-head center reveal">
-      <div class="rule"></div>
-      <span class="eyebrow" data-i="menuEy">Menü</span>
-      <h2 data-i="menuH2">Yavaş demlenir, aydınlık servis edilir.</h2>
-      <p data-i="menuSub">Kısa ve özenle seçilmiş bir liste.</p>
+    <div class="menu-video-wrap reveal">
+      <video class="menu-video" autoplay muted loop playsinline preload="none" poster="videos/menu-bg-poster.jpg">
+        <source src="videos/menu-bg.mp4" type="video/mp4">
+      </video>
+      <div class="menu-video-overlay"></div>
+      <div class="sec-head center on-video">
+        <div class="rule"></div>
+        <span class="eyebrow" data-i="menuEy">Menü</span>
+        <h2 data-i="menuH2">Yavaş demlenir, aydınlık servis edilir.</h2>
+        <p data-i="menuSub">Kısa ve özenle seçilmiş bir liste.</p>
+      </div>
     </div>
     <div class="tabs" id="tabs"></div>
     <div class="ph menu-hero" id="menuHero"></div>
@@ -511,8 +531,8 @@ const MENU={
     {img:"sicak-cikolata",n:{tr:"Sıcak Çikolata",en:"Hot Chocolate",ar:"شوكولاتة ساخنة"},d:{tr:"Belçika çikolatası",en:"Belgian chocolate",ar:"شوكولاتة بلجيكية"},p:90,k:300},
     {img:"chai-latte",n:{tr:"Chai Latte",en:"Chai Latte",ar:"تشاي لاتيه"},d:{tr:"Baharatlı, ballı",en:"Spiced, honeyed",ar:"بالتوابل والعسل"},p:90,k:190},
     {img:"limonata",n:{tr:"Limonata",en:"Lemonade",ar:"ليموناضة"},d:{tr:"Taze sıkım, nane",en:"Fresh-pressed, mint",ar:"عصير طازج بالنعناع"},p:80,k:90},
-    {n:{tr:"Ekstra Shot",en:"Extra Shot",ar:"شوت إضافي"},d:{tr:"Tek shot espresso",en:"Single espresso shot",ar:"شوت إسبريسو مفرد"},p:15,k:5},
-    {n:{tr:"Badem / Yulaf Sütü",en:"Almond / Oat Milk",ar:"حليب لوز / شوفان"},d:{tr:"Süt değişimi",en:"Milk swap",ar:"استبدال الحليب"},p:20,k:30}
+    {img:"ekstra-shot",n:{tr:"Ekstra Shot",en:"Extra Shot",ar:"شوت إضافي"},d:{tr:"Tek shot espresso",en:"Single espresso shot",ar:"شوت إسبريسو مفرد"},p:15,k:5},
+    {img:"badem-yulaf-sutu",n:{tr:"Badem / Yulaf Sütü",en:"Almond / Oat Milk",ar:"حليب لوز / شوفان"},d:{tr:"Süt değişimi",en:"Milk swap",ar:"استبدال الحليب"},p:20,k:30}
   ],
   kahvalti:[
     {img:"mese-tabagi",n:{tr:"Meşe Tabağı Kahvaltı",en:"Oak Board Breakfast",ar:"طبق البلوط للفطور"},d:{tr:"Peynirler, zeytin, bal-kaymak, ekşi maya",en:"Cheeses, olives, honey-cream, sourdough",ar:"أجبان وزيتون وعسل بالقشطة وخبز مخمّر"},p:340,k:720},
